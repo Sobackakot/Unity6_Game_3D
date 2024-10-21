@@ -1,15 +1,20 @@
 
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 
 [CreateAssetMenu(fileName = "Installer(Character)", menuName = "Installers/Character")]
 public class CharacterInstaller : ScriptableObjectInstaller
-{ 
+{   
+    private const string InventoryUI_ID = "inventoryUI";
+    private const string EquipmentUI_ID = "equipmentUI";
+
     public override void InstallBindings()
     {
         BindCharacter();
-        BindCamera(); 
+        BindCamera();
+        BindInventory();
     }
 
     private void BindCamera()
@@ -30,5 +35,17 @@ public class CharacterInstaller : ScriptableObjectInstaller
         Container.Bind<CharacterAnimator>().FromComponentInHierarchy(this).AsSingle();
         Container.Bind<CharacterParkour>().FromComponentInHierarchy(this).AsSingle();   
         Container.Bind<CharacterComponent>().FromComponentInHierarchy(this).AsSingle();   
+    }
+    private void BindInventory()
+    {
+        // Bind InventoryUI with an identifier
+        Container.Bind<IInventoryUI<int>>().WithId(InventoryUI_ID).To<InventoryUI>().FromComponentInHierarchy(this).AsSingle();
+
+        Container.Bind<IInventoryUI<int>>().WithId(EquipmentUI_ID).To<EquipmentUI>().FromComponentInHierarchy(this).AsSingle();
+
+        Container.BindInterfacesAndSelfTo<InventoryController>().FromNew().AsSingle().NonLazy();
+        Container.BindInterfacesAndSelfTo<EquipmentController>().FromNew().AsSingle().NonLazy();
+
+         
     }
 }
