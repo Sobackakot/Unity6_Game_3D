@@ -33,9 +33,13 @@ public class CharacterComponent : MonoBehaviour
          rigidbodyCharacter.isKinematic = stateMachine.isKinematic;
         
         if (stateMachine.isKinematic)
-            colliderCharacter.enabled = false;
+        {
+            colliderCharacter.enabled = false; 
+        } 
         else
-            colliderCharacter.enabled = true;
+        {   
+            colliderCharacter.enabled = true; 
+        } 
         return stateMachine.isMoving;
     } 
     public void SetAnimatorMatchTarget()

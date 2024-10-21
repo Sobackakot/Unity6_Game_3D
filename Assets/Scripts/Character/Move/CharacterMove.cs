@@ -48,8 +48,7 @@ public class CharacterMove : MonoBehaviour
         { 
             rbCharacter.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);  
         }
-    }
-
+    } 
     public void SwitchMove()
     {
          speedMove = isRunning ? speedRun : speedWalk;
@@ -68,7 +67,7 @@ public class CharacterMove : MonoBehaviour
         isRunning = isKey;
     }
      
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.tag == OnCollisionTag)
         {
