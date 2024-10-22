@@ -2,7 +2,7 @@
 using System;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Item", menuName = "InventoryController/Item")]
+[CreateAssetMenu(fileName = "New Item", menuName = "Scriptable Objects/Item")]
 public class ItemScrObj : ScriptableObject
 {
     public Item item;
@@ -17,7 +17,7 @@ public class ItemScrObj : ScriptableObject
 
     public float Armor;
     public float Damage;
-    public EquipItem IndexOfSlot; //slots for equipping items
+    public EquipItems IndexOfSlot; //slots for equipping items
     
     public void SetIdFromNewItem()
     {
@@ -28,18 +28,21 @@ public class ItemScrObj : ScriptableObject
         }
     } 
 }
-public enum EquipItem : byte
-{    
+public enum EquipItems : byte
+{
     Helmet,
-    T_shirt,
-    Vest,
-    Gloves,
-    Trousers,
-    Shoes,
+    ArmorVest,
     Backpack,
-    Belt,
-    Shield,
     Weapon_1,
     Weapon_2,
+    Flashlight,
+    Binoculars,
+    Knife,
+    Bolts,
+    Grenades,
+    PDA,
+    Devices,
+    Ñonsumables,
+    Upgrade, 
     None
 }

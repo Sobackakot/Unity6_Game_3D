@@ -1,10 +1,13 @@
 
 
+using System;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class EquipmentSlot : InventorySlot
 {
-    public override void AddItemInSlot(ItemInSlot item, ItemScrObj data)
+    [SerializeField] private EquipFieldScrObj equipField;
+     public override void AddItemInSlot(ItemInSlot item, ItemScrObj data)
     {
         base.AddItemInSlot(item, data);
     }

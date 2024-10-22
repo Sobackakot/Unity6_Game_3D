@@ -13,7 +13,7 @@ public class EquipmentController  : IInitializable, IDisposable
     {
         this.equipmentUI = equipmentUI;
 
-        int indexSlot = System.Enum.GetNames(typeof(EquipItem)).Length; //get the number of slots for equipmentUI items
+        int indexSlot = System.Enum.GetNames(typeof(EquipItems)).Length; //get the number of slots for equipmentUI items
         equipmentItem = new List<ItemScrObj>(indexSlot);
         for (int i = 0; i < indexSlot; i++)
         {
