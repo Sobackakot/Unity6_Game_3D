@@ -15,13 +15,6 @@ public class EquipmentUI : MonoBehaviour, IInventoryUI<int>
         slots.AddRange(GetComponentsInChildren<EquipmentSlot>(false));
         itemsInSlots.AddRange(GetComponentsInChildren<EquipmentItemInSlot>(false));
     }
-    private void Start()
-    {
-        for(int i =0; i < slots.Count; i++)
-        {
-            itemsInSlots[i].equipSlotIndex = i;
-        }
-    } 
     public void SetNewItemByInventoryCell(int slotIndex) //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
