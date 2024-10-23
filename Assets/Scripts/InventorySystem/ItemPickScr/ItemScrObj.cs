@@ -17,7 +17,7 @@ public class ItemScrObj : ScriptableObject
 
     public float Armor;
     public float Damage;
-    public EquipItems IndexOfSlot; //slots for equipping items
+    public EquipItems itemType; //slots for equipping items
     
     public void SetIdFromNewItem()
     {

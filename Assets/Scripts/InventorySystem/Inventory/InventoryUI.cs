@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine; 
 
-public class InventoryUI: MonoBehaviour, IInventoryUI<int>
+public class InventoryUI: MonoBehaviour, IInventoryUI<byte, ItemScrObj>
 { 
     private List<ItemInSlot> ItemsInSlot = new List<ItemInSlot>();
     private List<InventorySlot> Slots = new List<InventorySlot>();
@@ -25,15 +25,15 @@ public class InventoryUI: MonoBehaviour, IInventoryUI<int>
         } 
         Debug.Log(" ItemsInSlot count = " + ItemsInSlot.Count + " Slots count = " + Slots.Count);
     } 
-    public void SetNewItemByInventoryCell(int slotIndex) //coll from InventoryController
+    public void SetNewItemByInventoryCell(byte slotIndex, ItemScrObj newItem) //coll from InventoryController
     { 
         List<ItemScrObj> items = onSetNewItem?.Invoke();
         if (slotIndex < items.Count && items[slotIndex] != null) //updates the inventory user interface, those slots that have been changed
         { 
-            Slots[slotIndex].AddItemInSlot(ItemsInSlot[slotIndex], items[slotIndex]);
+            Slots[slotIndex].AddItemInSlot(ItemsInSlot[slotIndex], newItem);
         }
     }
-    public void ResetItemByInventoryCell(int slotIndex) //coll from InventoryController
+    public void ResetItemByInventoryCell(byte slotIndex, ItemScrObj newItem) //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
         if (slotIndex < items.Count) //updates the inventory user interface, those slots that have been changed

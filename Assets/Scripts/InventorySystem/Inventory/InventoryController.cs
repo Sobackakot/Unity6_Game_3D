@@ -7,12 +7,12 @@ public class InventoryController: IInitializable, IDisposable
 {   
     public event Action onPointerExit;
 
-    private IInventoryUI<int> inventoryUI;
+    private IInventoryUI<byte,ItemScrObj> inventoryUI;
      
     public readonly List<ItemScrObj> itemsInventory;
     private int space = 48;
      
-    public InventoryController([Inject(Id = "inventoryUI")] IInventoryUI<int> inventoryUI)
+    public InventoryController([Inject(Id = "inventoryUI")] IInventoryUI<byte, ItemScrObj> inventoryUI)
     {
         this.inventoryUI = inventoryUI;
 
@@ -34,12 +34,12 @@ public class InventoryController: IInitializable, IDisposable
 
     public bool AddItemToInventory(ItemScrObj newItem) //coll from EquipmentController,PickUpItems
     { 
-        for (int i = 0; i < itemsInventory.Count; i++)
+        for (byte i = 0; i < itemsInventory.Count; i++)
         {
             if (itemsInventory[i] == null)
             {
                 itemsInventory[i] = newItem; 
-                inventoryUI.SetNewItemByInventoryCell(i); // update inventory slots
+                inventoryUI.SetNewItemByInventoryCell(i, newItem); // update inventory slots
                 return true;
             }
         } 
@@ -48,12 +48,12 @@ public class InventoryController: IInitializable, IDisposable
 
     public void RemoveItemFromInventory(ItemScrObj item) // coll from ItemInSlot
     {
-        for (int i = 0; i < itemsInventory.Count; i++)
+        for (byte i = 0; i < itemsInventory.Count; i++)
         {
             if (itemsInventory[i] == item)
             {
                 itemsInventory[i] = null;
-                inventoryUI.ResetItemByInventoryCell(i);// update inventory slots
+                inventoryUI.ResetItemByInventoryCell(i, item);// update inventory slots
                 return;
             }
         }

@@ -4,9 +4,9 @@ using UnityEngine;
 public class EquipFieldScrObj : ScriptableObject
 {
     public EquipField equipField;
-    public EquipFields equipFields;
+    public EquipFields fieldType;
 }
-public enum EquipFields
+public enum EquipFields : byte
 {
     Helmet,
     ArmorVest,

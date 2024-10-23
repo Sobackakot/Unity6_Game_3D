@@ -1,9 +1,9 @@
 
 using System;
-using System.Collections.Generic; 
+using System.Collections.Generic;
 using UnityEngine; 
 
-public class EquipmentUI : MonoBehaviour, IInventoryUI<int>
+public class EquipmentUI : MonoBehaviour, IInventoryUI<byte,ItemScrObj>
 { 
     private List<EquipmentSlot> slots = new List<EquipmentSlot>();
     private List<EquipmentItemInSlot> itemsInSlots = new List<EquipmentItemInSlot>();
@@ -14,27 +14,37 @@ public class EquipmentUI : MonoBehaviour, IInventoryUI<int>
     {
         slots.AddRange(GetComponentsInChildren<EquipmentSlot>(false));
         itemsInSlots.AddRange(GetComponentsInChildren<EquipmentItemInSlot>(false));
-    }
-    public void SetNewItemByInventoryCell(int slotIndex) //coll from InventoryController
+    } 
+    public void SetNewItemByInventoryCell(byte index, ItemScrObj newItem) //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
-        if (slotIndex < items.Count && items[slotIndex] != null) //updates the inventory user interface, those slots that have been changed
+        for(byte i = 0; i < slots.Count; i++)
         {
-            slots[slotIndex].AddItemInSlot(itemsInSlots[slotIndex], items[slotIndex]);
+            EquipFields equipFields = slots[i].equipField.fieldType;
+            if((byte)newItem.itemType == (byte)equipFields)
+            {
+                slots[i].AddItemInSlot(itemsInSlots[i], newItem);
+                return;
+            }
         }
+        Debug.Log("No matching slot found for item type: " + newItem.itemType);
     }
-    public void ResetItemByInventoryCell(int slotIndex) //coll from InventoryController
+    public void ResetItemByInventoryCell(byte index, ItemScrObj item) //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
-        if (slotIndex < items.Count) //updates the inventory user interface, those slots that have been changed
+        for(byte i = 0; i < slots.Count; i++)
         {
-            slots[slotIndex].RemoveItemInSlot(itemsInSlots[slotIndex]);
+            EquipFields equipFields = slots[i].equipField.fieldType;
+            if ((byte)item.itemType == (byte)equipFields)
+            { 
+                slots[i].RemoveItemInSlot(itemsInSlots[i]);
+            }
         }
     }
     public void UpdateInventorySlots() //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
-        for (int i = 0; i < slots.Count; i++) //Updates the inventory UI completely when changing characters
+        for (byte i = 0; i < slots.Count; i++) //Updates the inventory UI completely when changing characters
         {
             if (itemsInSlots[i].dataItem != null)
             {

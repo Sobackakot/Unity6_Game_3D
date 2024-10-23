@@ -75,7 +75,7 @@ public class ItemInSlot : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDr
     {
         if (eventData.button == PointerEventData.InputButton.Left && dataItem != null)
         {   
-            if(dataItem.IndexOfSlot != EquipItems.None) 
+            if(dataItem.itemType != EquipItems.None) 
             {
                 equipment.EquipItem(dataItem);
                 inventory.RemoveItemFromInventory(dataItem);

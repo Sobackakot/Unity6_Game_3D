@@ -1,15 +1,15 @@
 
 using System;
 using System.Collections.Generic; 
-using Zenject;
+using Zenject; 
 
 public class EquipmentController  : IInitializable, IDisposable
 {   
-    private IInventoryUI<int> equipmentUI;
+    private IInventoryUI<byte, ItemScrObj> equipmentUI;
     public event Func<ItemScrObj, bool> onEquipItemOnPerson;
 
     public readonly List<ItemScrObj> equipmentItem;
-    public EquipmentController([Inject(Id = "equipmentUI")] IInventoryUI<int> equipmentUI)
+    public EquipmentController([Inject(Id = "equipmentUI")] IInventoryUI<byte, ItemScrObj> equipmentUI)
     {
         this.equipmentUI = equipmentUI;
 
@@ -34,7 +34,7 @@ public class EquipmentController  : IInitializable, IDisposable
     }
     public void EquipItem(ItemScrObj newItem) //coll from ItemInSlot
     {
-        int currentIndex = (int)newItem.IndexOfSlot; // convert from EquipmentScrObj Slot to index 
+        byte currentIndex = (byte)newItem.itemType; // convert from EquipmentScrObj Slot to index 
         ItemScrObj oldItem = null;
         if (equipmentItem[currentIndex] != null) //if such an item is already equipped
         {
@@ -42,10 +42,10 @@ public class EquipmentController  : IInitializable, IDisposable
             onEquipItemOnPerson?.Invoke(oldItem);
         } 
         equipmentItem[currentIndex] = newItem;//equip pick item  from inventory cell
-        equipmentUI.SetNewItemByInventoryCell(currentIndex); 
+        equipmentUI.SetNewItemByInventoryCell(currentIndex, newItem); 
     }
    
-    private void UnEquipItem(int currentIndex)
+    private void UnEquipItem(byte currentIndex)
     {
         if (equipmentItem[currentIndex] != null)//if such an item is already equipped
         {
@@ -53,7 +53,7 @@ public class EquipmentController  : IInitializable, IDisposable
             onEquipItemOnPerson?.Invoke(oldItem);
             equipmentItem[currentIndex] = null;//reset an item's equipmentUI slot 
         }
-        equipmentUI.ResetItemByInventoryCell(currentIndex);
+        equipmentUI.ResetItemByInventoryCell(currentIndex, equipmentItem[currentIndex]);
     }
     public List<ItemScrObj> GetEquipmentItems()
     {
@@ -61,7 +61,7 @@ public class EquipmentController  : IInitializable, IDisposable
     }
     private void UnEquipItemsAll() //....
     {
-       for(int i = 0; i< equipmentItem.Count; i++)
+       for(byte i = 0; i< equipmentItem.Count; i++)
        {
             UnEquipItem(i);
        }

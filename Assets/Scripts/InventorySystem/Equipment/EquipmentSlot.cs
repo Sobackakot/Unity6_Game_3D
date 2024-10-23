@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 
 public class EquipmentSlot : InventorySlot
 {
-    [SerializeField] private EquipFieldScrObj equipField;
+    public EquipFieldScrObj equipField;
      public override void AddItemInSlot(ItemInSlot item, ItemScrObj data)
     {
         base.AddItemInSlot(item, data);

@@ -19,4 +19,4 @@ MonoBehaviour:
     isStackable: 0
     closedIMage: {fileID: 21300000, guid: 6de27a597474c904499f7cade038c210, type: 3}
     isClosed: 0
-  equipFields: 2
+  fieldType: 2
