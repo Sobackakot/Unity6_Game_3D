@@ -2,9 +2,9 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine; 
+using UnityEngine;
 
-public class InventoryUI: MonoBehaviour, IInventoryUI<byte, ItemScrObj>
+public class InventoryUI: MonoBehaviour, IInventoryUI<ItemScrObj, byte>
 { 
     private List<ItemInSlot> ItemsInSlot = new List<ItemInSlot>();
     private List<InventorySlot> Slots = new List<InventorySlot>();
@@ -14,18 +14,16 @@ public class InventoryUI: MonoBehaviour, IInventoryUI<byte, ItemScrObj>
     private void Awake()
     {
         ItemsInSlot.AddRange(GetComponentsInChildren<ItemInSlot>(false));
-        Slots.AddRange(GetComponentsInChildren<InventorySlot>(false));
-        Debug.Log(" ItemsInSlot count = " + ItemsInSlot.Count + " Slots count = " + Slots.Count);
+        Slots.AddRange(GetComponentsInChildren<InventorySlot>(false)); 
     }
     private void Start()
     {
         for(int i  =0; i < Slots.Count; i++)
         {
             ItemsInSlot[i].slotIndex = i;
-        } 
-        Debug.Log(" ItemsInSlot count = " + ItemsInSlot.Count + " Slots count = " + Slots.Count);
+        }  
     } 
-    public void SetNewItemByInventoryCell(byte slotIndex, ItemScrObj newItem) //coll from InventoryController
+    public void SetNewItemByInventoryCell(ItemScrObj newItem,byte slotIndex) //coll from InventoryController
     { 
         List<ItemScrObj> items = onSetNewItem?.Invoke();
         if (slotIndex < items.Count && items[slotIndex] != null) //updates the inventory user interface, those slots that have been changed
@@ -33,12 +31,12 @@ public class InventoryUI: MonoBehaviour, IInventoryUI<byte, ItemScrObj>
             Slots[slotIndex].AddItemInSlot(ItemsInSlot[slotIndex], newItem);
         }
     }
-    public void ResetItemByInventoryCell(byte slotIndex, ItemScrObj newItem) //coll from InventoryController
+    public void ResetItemByInventoryCell(ItemScrObj item = null, byte slot = 0) //coll from InventoryController
     {
         List<ItemScrObj> items = onSetNewItem?.Invoke();
-        if (slotIndex < items.Count) //updates the inventory user interface, those slots that have been changed
+        if (slot < items.Count) //updates the inventory user interface, those slots that have been changed
         {
-            Slots[slotIndex].RemoveItemInSlot(ItemsInSlot[slotIndex]);
+            Slots[slot].RemoveItemInSlot(ItemsInSlot[slot]);
         }
     }
     public void UpdateInventorySlots() //coll from InventoryController

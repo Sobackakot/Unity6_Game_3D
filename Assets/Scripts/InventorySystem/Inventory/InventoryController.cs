@@ -7,12 +7,12 @@ public class InventoryController: IInitializable, IDisposable
 {   
     public event Action onPointerExit;
 
-    private IInventoryUI<byte,ItemScrObj> inventoryUI;
+    private IInventoryUI<ItemScrObj, byte> inventoryUI;
      
     public readonly List<ItemScrObj> itemsInventory;
     private int space = 48;
      
-    public InventoryController([Inject(Id = "inventoryUI")] IInventoryUI<byte, ItemScrObj> inventoryUI)
+    public InventoryController([Inject(Id = "inventoryUI")] IInventoryUI<ItemScrObj, byte> inventoryUI)
     {
         this.inventoryUI = inventoryUI;
 
@@ -39,7 +39,7 @@ public class InventoryController: IInitializable, IDisposable
             if (itemsInventory[i] == null)
             {
                 itemsInventory[i] = newItem; 
-                inventoryUI.SetNewItemByInventoryCell(i, newItem); // update inventory slots
+                inventoryUI.SetNewItemByInventoryCell( newItem, i); // update inventory slots
                 return true;
             }
         } 
@@ -53,7 +53,7 @@ public class InventoryController: IInitializable, IDisposable
             if (itemsInventory[i] == item)
             {
                 itemsInventory[i] = null;
-                inventoryUI.ResetItemByInventoryCell(i, item);// update inventory slots
+                inventoryUI.ResetItemByInventoryCell(item,i);// update inventory slots
                 return;
             }
         }

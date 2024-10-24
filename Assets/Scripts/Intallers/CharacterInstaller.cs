@@ -39,9 +39,9 @@ public class CharacterInstaller : ScriptableObjectInstaller
     private void BindInventory()
     {
         // Bind InventoryUI with an identifier
-        Container.Bind<IInventoryUI<byte, ItemScrObj>>().WithId(InventoryUI_ID).To<InventoryUI>().FromComponentInHierarchy(this).AsSingle();
+        Container.Bind<IInventoryUI<ItemScrObj, byte>>().WithId(InventoryUI_ID).To<InventoryUI>().FromComponentInHierarchy(this).AsSingle();
 
-        Container.Bind<IInventoryUI<byte, ItemScrObj>>().WithId(EquipmentUI_ID).To<EquipmentUI>().FromComponentInHierarchy(this).AsSingle();
+        Container.Bind<IInventoryUI<ItemScrObj, byte>>().WithId(EquipmentUI_ID).To<EquipmentUI>().FromComponentInHierarchy(this).AsSingle();
 
         Container.BindInterfacesAndSelfTo<InventoryController>().FromNew().AsSingle().NonLazy();
         Container.BindInterfacesAndSelfTo<EquipmentController>().FromNew().AsSingle().NonLazy();

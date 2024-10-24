@@ -5,11 +5,11 @@ using Zenject;
 
 public class EquipmentController  : IInitializable, IDisposable
 {   
-    private IInventoryUI<byte, ItemScrObj> equipmentUI;
+    private IInventoryUI<ItemScrObj, byte> equipmentUI;
     public event Func<ItemScrObj, bool> onEquipItemOnPerson;
 
     public readonly List<ItemScrObj> equipmentItem;
-    public EquipmentController([Inject(Id = "equipmentUI")] IInventoryUI<byte, ItemScrObj> equipmentUI)
+    public EquipmentController([Inject(Id = "equipmentUI")] IInventoryUI<ItemScrObj, byte> equipmentUI)
     {
         this.equipmentUI = equipmentUI;
 
@@ -42,7 +42,7 @@ public class EquipmentController  : IInitializable, IDisposable
             onEquipItemOnPerson?.Invoke(oldItem);
         } 
         equipmentItem[currentIndex] = newItem;//equip pick item  from inventory cell
-        equipmentUI.SetNewItemByInventoryCell(currentIndex, newItem); 
+        equipmentUI.SetNewItemByInventoryCell(newItem); 
     }
    
     private void UnEquipItem(byte currentIndex)
@@ -53,7 +53,7 @@ public class EquipmentController  : IInitializable, IDisposable
             onEquipItemOnPerson?.Invoke(oldItem);
             equipmentItem[currentIndex] = null;//reset an item's equipmentUI slot 
         }
-        equipmentUI.ResetItemByInventoryCell(currentIndex, equipmentItem[currentIndex]);
+        equipmentUI.ResetItemByInventoryCell(equipmentItem[currentIndex]);
     }
     public List<ItemScrObj> GetEquipmentItems()
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine; 
 
-public class EquipmentUI : MonoBehaviour, IInventoryUI<byte,ItemScrObj>
+public class EquipmentUI : MonoBehaviour, IInventoryUI<ItemScrObj, byte>
 { 
     private List<EquipmentSlot> slots = new List<EquipmentSlot>();
     private List<EquipmentItemInSlot> itemsInSlots = new List<EquipmentItemInSlot>();
@@ -15,9 +15,8 @@ public class EquipmentUI : MonoBehaviour, IInventoryUI<byte,ItemScrObj>
         slots.AddRange(GetComponentsInChildren<EquipmentSlot>(false));
         itemsInSlots.AddRange(GetComponentsInChildren<EquipmentItemInSlot>(false));
     } 
-    public void SetNewItemByInventoryCell(byte index, ItemScrObj newItem) //coll from InventoryController
-    {
-        List<ItemScrObj> items = onSetNewItem?.Invoke();
+    public void SetNewItemByInventoryCell(ItemScrObj newItem, byte index = 0) //coll from InventoryController
+    { 
         for(byte i = 0; i < slots.Count; i++)
         {
             EquipFields equipFields = slots[i].equipField.fieldType;
@@ -26,12 +25,10 @@ public class EquipmentUI : MonoBehaviour, IInventoryUI<byte,ItemScrObj>
                 slots[i].AddItemInSlot(itemsInSlots[i], newItem);
                 return;
             }
-        }
-        Debug.Log("No matching slot found for item type: " + newItem.itemType);
+        } 
     }
-    public void ResetItemByInventoryCell(byte index, ItemScrObj item) //coll from InventoryController
-    {
-        List<ItemScrObj> items = onSetNewItem?.Invoke();
+    public void ResetItemByInventoryCell(ItemScrObj item = null, byte index = 0) //coll from InventoryController
+    { 
         for(byte i = 0; i < slots.Count; i++)
         {
             EquipFields equipFields = slots[i].equipField.fieldType;
@@ -55,5 +52,5 @@ public class EquipmentUI : MonoBehaviour, IInventoryUI<byte,ItemScrObj>
                 slots[i].AddItemInSlot(itemsInSlots[i], items[i]);
             }
         }
-    }
+    } 
 }
