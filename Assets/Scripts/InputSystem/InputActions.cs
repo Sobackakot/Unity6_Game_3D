@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryKey"",
+                    ""type"": ""Button"",
+                    ""id"": ""51dbd497-9881-4753-904b-fc38e521c3a6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -192,6 +201,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""MouseMidle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b809451b-56dd-4af6-acc4-c766196cc0e4"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""InventoryKey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -206,6 +226,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_ActionMaps_MouseDelta = m_ActionMaps.FindAction("MouseDelta", throwIfNotFound: true);
         m_ActionMaps_MouseScroll = m_ActionMaps.FindAction("MouseScroll", throwIfNotFound: true);
         m_ActionMaps_MouseMidle = m_ActionMaps.FindAction("MouseMidle", throwIfNotFound: true);
+        m_ActionMaps_InventoryKey = m_ActionMaps.FindAction("InventoryKey", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -278,6 +299,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_ActionMaps_MouseDelta;
     private readonly InputAction m_ActionMaps_MouseScroll;
     private readonly InputAction m_ActionMaps_MouseMidle;
+    private readonly InputAction m_ActionMaps_InventoryKey;
     public struct ActionMapsActions
     {
         private @InputActions m_Wrapper;
@@ -288,6 +310,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @MouseDelta => m_Wrapper.m_ActionMaps_MouseDelta;
         public InputAction @MouseScroll => m_Wrapper.m_ActionMaps_MouseScroll;
         public InputAction @MouseMidle => m_Wrapper.m_ActionMaps_MouseMidle;
+        public InputAction @InventoryKey => m_Wrapper.m_ActionMaps_InventoryKey;
         public InputActionMap Get() { return m_Wrapper.m_ActionMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -315,6 +338,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MouseMidle.started += instance.OnMouseMidle;
             @MouseMidle.performed += instance.OnMouseMidle;
             @MouseMidle.canceled += instance.OnMouseMidle;
+            @InventoryKey.started += instance.OnInventoryKey;
+            @InventoryKey.performed += instance.OnInventoryKey;
+            @InventoryKey.canceled += instance.OnInventoryKey;
         }
 
         private void UnregisterCallbacks(IActionMapsActions instance)
@@ -337,6 +363,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MouseMidle.started -= instance.OnMouseMidle;
             @MouseMidle.performed -= instance.OnMouseMidle;
             @MouseMidle.canceled -= instance.OnMouseMidle;
+            @InventoryKey.started -= instance.OnInventoryKey;
+            @InventoryKey.performed -= instance.OnInventoryKey;
+            @InventoryKey.canceled -= instance.OnInventoryKey;
         }
 
         public void RemoveCallbacks(IActionMapsActions instance)
@@ -362,5 +391,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMouseDelta(InputAction.CallbackContext context);
         void OnMouseScroll(InputAction.CallbackContext context);
         void OnMouseMidle(InputAction.CallbackContext context);
+        void OnInventoryKey(InputAction.CallbackContext context);
     }
 }

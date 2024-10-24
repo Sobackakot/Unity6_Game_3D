@@ -5,20 +5,22 @@ using Zenject;
 public class MoveController : IInitializable, IDisposable, ITickable, IFixedTickable, ILateTickable
 {
     public MoveController(InputCharacter inputCharacter, CharacterMove character, 
-        CharacterAnimator characterAnimator, CharacterParkour characterParkour, CharacterComponent components )
+        CharacterAnimator characterAnimator, CharacterParkour characterParkour, CharacterComponent components, ActiveInventory inventory)
     {
         this.inputCharacter = inputCharacter;
         this.character = character;
         this.characterAnimator = characterAnimator;
         this.characterParkour = characterParkour;
-        this.components = components; 
+        this.components = components;
+        this.inventory =  inventory;
     }
 
     private InputCharacter inputCharacter;
     private CharacterMove character;
     private CharacterAnimator characterAnimator;
     private CharacterParkour characterParkour;
-    private CharacterComponent components; 
+    private CharacterComponent components;
+    private ActiveInventory inventory;
 
     private bool isMoving;
     private bool isStateParcure;
@@ -37,7 +39,7 @@ public class MoveController : IInitializable, IDisposable, ITickable, IFixedTick
     }
 
     public void Tick()
-    {
+    {   
         components.SetAnimatorMatchTarget();
         isMoving = components.UpdateStateComponetn();
         isStateParcure = characterParkour.isParcourUp;
@@ -49,7 +51,8 @@ public class MoveController : IInitializable, IDisposable, ITickable, IFixedTick
         if (character.isJumping)
         { 
             characterAnimator.ParkourUp(isStateParcure);
-        }  
+        }
+        inventory.Activate();
     }
 
     public void FixedTick()

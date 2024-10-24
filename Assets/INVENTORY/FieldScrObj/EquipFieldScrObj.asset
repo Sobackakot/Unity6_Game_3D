@@ -16,7 +16,7 @@ MonoBehaviour:
     isTakenField: 0
     durability: 0
     amount: 0
-    isStackable: 0
+    isStackable: 1
     closedIMage: {fileID: 0}
     isClosed: 0
-  fieldType: 0
+  fieldType: 14

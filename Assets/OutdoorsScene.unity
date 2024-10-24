@@ -4917,7 +4917,7 @@ GameObject:
   - component: {fileID: 242932242}
   - component: {fileID: 242932241}
   m_Layer: 0
-  m_Name: Cube (2)
+  m_Name: Parkour (2)
   m_TagString: Terra
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5273,7 +5273,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2320050368426870478, guid: 33a66f0fbf731ea4bb05806aaad4c2b7, type: 3}
       propertyPath: m_Name
-      value: Person
+      value: Person_#
       objectReference: {fileID: 0}
     - target: {fileID: 2320050368426870478, guid: 33a66f0fbf731ea4bb05806aaad4c2b7, type: 3}
       propertyPath: m_Layer
@@ -5848,7 +5848,7 @@ GameObject:
   - component: {fileID: 306842910}
   - component: {fileID: 306842909}
   m_Layer: 5
-  m_Name: EquipPan
+  m_Name: EquipPan_#
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6163,7 +6163,7 @@ GameObject:
   - component: {fileID: 322759558}
   - component: {fileID: 322759557}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Parkour
   m_TagString: Parkour
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6373,7 +6373,7 @@ GameObject:
   - component: {fileID: 329500437}
   - component: {fileID: 329500436}
   m_Layer: 0
-  m_Name: Cube (1)
+  m_Name: Parkour (1)
   m_TagString: Parkour
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9397,7 +9397,7 @@ GameObject:
   - component: {fileID: 559040309}
   - component: {fileID: 559040312}
   m_Layer: 5
-  m_Name: InventoryPanel
+  m_Name: InventoryPanel_#
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21496,7 +21496,7 @@ GameObject:
   - component: {fileID: 1393663549}
   - component: {fileID: 1393663548}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: InventorySystemPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27114,7 +27114,7 @@ GameObject:
   - component: {fileID: 1823688468}
   - component: {fileID: 1823688469}
   m_Layer: 0
-  m_Name: PersonCamera
+  m_Name: PersonCamera_#
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
